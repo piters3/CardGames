@@ -19,31 +19,54 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--<TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">Ilość kart komputera:</TextBlock>
-        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" x:Name="ile" VerticalAlignment="Center" Text="{Binding Path=MyCards}"/>
-        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" x:Name="ile2" VerticalAlignment="Center" Margin="0,40,0,0"/>-->
-        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Column="1">Komputer</TextBlock>
-        <Image Source="Images\back.jpg" Margin="0,40" Grid.Column="1" Visibility="Hidden"/> <!-- Hidden -->
 
-        <Image Source="Images\back.jpg" Margin="0,40" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Hidden"/> <!-- Hidden -->
+        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Column="1">Komputer</TextBlock>
+        <Image Source="Images\back.jpg" Margin="0,40" Grid.Column="1" Visibility="Hidden" x:Name="EnemyCards"/> <!-- Hidden -->
+        <Image Source="Images\back.jpg" Margin="0,40" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Hidden" x:Name="EnemyTakenCards"/> <!-- Hidden -->
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Source="Images\back.jpg" Margin="0,40,10,40" Grid.Column="0" HorizontalAlignment="Right" x:Name='EnemyCard' Visibility="Hidden"/> <!-- Hidden -->
-            <Image Source="Images\back.jpg" Margin="10,40,0,40" Grid.Column="1" HorizontalAlignment="Left" x:Name='MyCard' Visibility="Hidden" />   <!-- Hidden -->
+
+            <ContentControl Content="{Binding EnemyThrownCard.Img}" Margin="0,40,10,40" Grid.Column="0" HorizontalAlignment="Right" />
+            <ContentControl Content="{Binding MyThrownCard.Img}" Margin="10,40,0,40" Grid.Column="1" HorizontalAlignment="Left" />
         </Grid>
 
-        <Image Source="Images\back.jpg" Margin="0,40" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Visibility="Hidden"/> <!-- Hidden -->
-
-        <Image Source="Images\back.jpg" Grid.Row="2" Margin="0,40" Grid.Column="1" Cursor="Hand" MouseDown="Image_MouseDown" Visibility="Hidden"/>  <!-- Hidden -->
+        <Image Source="Images\back.jpg" Margin="0,40" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" Visibility="Hidden"  x:Name="MyTakenCards"/> <!-- Hidden -->
+        <Image Source="Images\back.jpg" Grid.Row="2" Margin="0,40" Grid.Column="1" Cursor="Hand" MouseDown="ThrowCard" Visibility="Hidden" x:Name="MyCards"/>  <!-- Hidden -->
         <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Row="2" VerticalAlignment="Bottom" Grid.Column="1">Ty</TextBlock>
-        <!--<Image Source="Images/back.jpg" Grid.Column="0" HorizontalAlignment="Center" x:Name='AllCards' Grid.Row="1" VerticalAlignment="Center" Margin="0,40"/>-->
-        <!--<TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Row="2" Grid.Column="2">Ilość Twoich kart:</TextBlock>-->
 
-        <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Cursor="Hand" Padding="10" FontWeight="Bold" Click="Button_Click">Rozdaj karty!</Button>
 
+        <!--<DataGrid ItemsSource="{Binding Deck}" AutoGenerateColumns="False"  Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding Img}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>-->
+        
+        <!--<ListBox ItemsSource="{Binding Deck}" Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <ContentControl Content="{Binding Img}"
+                                        Width="100" Height="100" />
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">Ilość kart komputera:</TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" x:Name="ile2" VerticalAlignment="Center" Margin="0,40,0,0" Text="{Binding EnemyCards.Count}"/>
+
+        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Row="2" Grid.Column="2">Ilość Twoich kart:</TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" x:Name="ile"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Text="{Binding MyCards.Count}"/>
+        
+        <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Cursor="Hand" Padding="10" FontWeight="Bold" Click="GiveOutCardsButtonClick" >Rozdaj karty!</Button>
     </Grid>
 </Page>

@@ -56,7 +56,6 @@
     </ApplicationDefinition>
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
-    <Compile Include="ObservableQueue.cs" />
     <Compile Include="War.cs" />
     <Compile Include="WarPage.xaml.cs">
       <DependentUpon>WarPage.xaml</DependentUpon>
@@ -115,61 +114,172 @@
     <Resource Include="Images\10Dzwonek.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\10Serce.jpg" />
-    <Resource Include="Images\10Wino.jpg" />
-    <Resource Include="Images\10Żołądź.jpg" />
-    <Resource Include="Images\2Dzwonek.jpg" />
-    <Resource Include="Images\2Serce.jpg" />
-    <Resource Include="Images\2Wino.jpg" />
-    <Resource Include="Images\2Żołądź.jpg" />
-    <Resource Include="Images\3Dzwonek.jpg" />
-    <Resource Include="Images\3Serce.jpg" />
-    <Resource Include="Images\3Wino.jpg" />
-    <Resource Include="Images\3Żołądź.jpg" />
-    <Resource Include="Images\4Dzwonek.jpg" />
-    <Resource Include="Images\4Serce.jpg" />
-    <Resource Include="Images\4Wino.jpg" />
-    <Resource Include="Images\4Żołądź.jpg" />
-    <Resource Include="Images\5Dzwonek.jpg" />
-    <Resource Include="Images\5Serce.jpg" />
-    <Resource Include="Images\5Wino.jpg" />
-    <Resource Include="Images\5Żołądź.jpg" />
-    <Resource Include="Images\6Dzwonek.jpg" />
-    <Resource Include="Images\6Serce.jpg" />
-    <Resource Include="Images\6Wino.jpg" />
-    <Resource Include="Images\6Żołądź.jpg" />
-    <Resource Include="Images\7Dzwonek.jpg" />
-    <Resource Include="Images\7Serce.jpg" />
-    <Resource Include="Images\7Wino.jpg" />
-    <Resource Include="Images\7Żołądź.jpg" />
-    <Resource Include="Images\8Dzwonek.jpg" />
-    <Resource Include="Images\8Serce.jpg" />
-    <Resource Include="Images\8Wino.jpg" />
-    <Resource Include="Images\8Żołądź.jpg" />
-    <Resource Include="Images\9Dzwonek.jpg" />
-    <Resource Include="Images\9Serce.jpg" />
-    <Resource Include="Images\9Wino.jpg" />
-    <Resource Include="Images\9Żołądź.jpg" />
-    <Resource Include="Images\AsDzwonek.jpg" />
-    <Resource Include="Images\AsSerce.jpg" />
-    <Resource Include="Images\AsWino.jpg" />
-    <Resource Include="Images\AsŻołądź.jpg" />
-    <Resource Include="Images\DamaDzwonek.jpg" />
-    <Resource Include="Images\DamaSerce.jpg" />
-    <Resource Include="Images\DamaWino.jpg" />
-    <Resource Include="Images\DamaŻołądź.jpg" />
-    <Resource Include="Images\KrólDzwonek.jpg" />
-    <Resource Include="Images\KrólSerce.jpg" />
-    <Resource Include="Images\KrólWino.jpg" />
-    <Resource Include="Images\KrólŻołądź.jpg" />
-    <Resource Include="Images\WaletDzwonek.jpg" />
-    <Resource Include="Images\WaletSerce.jpg" />
-    <Resource Include="Images\WaletWino.jpg" />
-    <Resource Include="Images\WaletŻołądź.jpg" />
+    <Resource Include="Images\10Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\10Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\10Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\2Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\2Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\2Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\2Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\3Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\3Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\3Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\3Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\4Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\4Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\4Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\4Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\5Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\5Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\5Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\5Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\6Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\6Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\6Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\6Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\7Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\7Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\7Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\7Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\8Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\8Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\8Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\8Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\9Dzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\9Serce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\9Wino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\9Żołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AsDzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AsSerce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AsWino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AsŻołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DamaDzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DamaSerce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DamaWino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DamaŻołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\KrólDzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\KrólSerce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\KrólWino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\KrólŻołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WaletDzwonek.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WaletSerce.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WaletWino.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WaletŻołądź.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\back.jpg" />
-    <Resource Include="Images\card_back.png" />
+    <Resource Include="Images\back.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\card_back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Joker.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
