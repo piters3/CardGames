@@ -5,6 +5,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace CardGames
 {
@@ -13,10 +16,69 @@ namespace CardGames
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         private ObservableCollection<Card> _deck;
-        private ObservableCollection<Card> _myCards;
-        private ObservableCollection<Card> _enemyCards;
+        private ObservableCollection<Card> _myPile;
+        private ObservableCollection<Card> _enemyPile;
         private Card _enemyThrownCard;
         private Card _myThrownCard;
+        private string _status;
+        private Card _myFirstTakencard;
+        private Card _mySecondTakenCard;
+        private Card _enemyFirstTakenCard;
+        private Card _enemySecondTakenCard;
+
+
+        public Card EnemyFirstTakenCard
+        {
+            get
+            {
+                return _enemyFirstTakenCard;
+            }
+            set
+            {
+                _enemyFirstTakenCard = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("EnemyFirstTakenCard"));
+            }
+        }
+
+        public Card EnemySecondTakenCard
+        {
+            get
+            {
+                return _enemySecondTakenCard;
+            }
+            set
+            {
+                _enemySecondTakenCard = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("EnemySecondTakenCard"));
+            }
+        }
+
+        public Card MyFirstTakenCard
+        {
+            get
+            {
+                return _myFirstTakencard;
+            }
+            set
+            {
+                _myFirstTakencard = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("MyFirstTakenCard"));
+            }
+        }
+
+        public Card MySecondTakenCard
+        {
+            get
+            {
+                return _mySecondTakenCard;
+            }
+            set
+            {
+                _mySecondTakenCard = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("MySecondTakenCard"));
+            }
+        }
+
 
         public ObservableCollection<Card> Deck
         {
@@ -31,29 +93,29 @@ namespace CardGames
             }
         }
 
-        public ObservableCollection<Card> MyCards
+        public ObservableCollection<Card> MyPile
         {
             get
             {
-                return _myCards;
+                return _myPile;
             }
             set
             {
-                _myCards = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("MyCards"));
+                _myPile = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("MyPile"));
             }
         }
 
-        public ObservableCollection<Card> EnemyCards
+        public ObservableCollection<Card> EnemyPile
         {
             get
             {
-                return _enemyCards;
+                return _enemyPile;
             }
             set
             {
-                _enemyCards = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("EnemyCards"));
+                _enemyPile = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("EnemyPile"));
             }
         }
 
@@ -83,11 +145,26 @@ namespace CardGames
             }
         }
 
+
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Status"));
+            }
+        }
+
+
         public War(ObservableCollection<Card> deck)
         {
             _deck = deck;
-            _myCards = new ObservableCollection<Card>();
-            _enemyCards = new ObservableCollection<Card>();
+            _myPile = new ObservableCollection<Card>();
+            _enemyPile = new ObservableCollection<Card>();
         }
 
 
@@ -99,11 +176,11 @@ namespace CardGames
             {
                 if (i % 2 == 0)
                 {
-                    MyCards.Add(Deck[i]);
+                    MyPile.Add(Deck[i]);
                 }
                 else
                 {
-                    EnemyCards.Add(Deck[i]);
+                    EnemyPile.Add(Deck[i]);
                 }
             }
         }
@@ -111,11 +188,82 @@ namespace CardGames
 
         public void ThrowCard()
         {
-            //if(_myCards.Count != 0 && _enemyCards.Count != 0)
-            //{
-            MyThrownCard = EnemyCards.FirstOrDefault();
-            EnemyThrownCard = MyCards.FirstOrDefault();
-            //}
+            if (MyPile.Count != 0 && EnemyPile.Count != 0)
+            {
+                MyThrownCard = MyPile.First();
+                EnemyThrownCard = EnemyPile.First();
+
+                if (MyThrownCard.FigureNumber < EnemyThrownCard.FigureNumber)
+                {
+                    Status = "Karty zabiera komputer";
+                    TakeCard(EnemyPile, MyPile, MyThrownCard);
+                }
+                else if (MyThrownCard.FigureNumber == EnemyThrownCard.FigureNumber)
+                {
+                    var mySecondCard = MyPile.ElementAt(1);
+                    var enemySecondCard = EnemyPile.ElementAt(1);
+                    var myThirdCard = MyPile.ElementAt(2);
+                    var enemyThirdCard = EnemyPile.ElementAt(2);
+
+                    if (myThirdCard.FigureNumber < enemyThirdCard.FigureNumber)
+                    {
+                        Status = "Wojna!!! \n Karty zabiera komputer";
+                        TakeCard(EnemyPile, MyPile, MyThrownCard);
+                        TakeCard(EnemyPile, MyPile, mySecondCard);
+                        TakeCard(EnemyPile, MyPile, myThirdCard);
+                    }
+                    else
+                    {
+                        Status = "Wojna!!! \n Zabierasz karty";
+                        TakeCard(MyPile, EnemyPile, EnemyThrownCard);
+                        TakeCard(MyPile, EnemyPile, enemySecondCard);
+                        TakeCard(MyPile, EnemyPile, enemyThirdCard);
+                    }
+                }
+                else
+                {
+                    Status = "Zabierasz karty";
+                    TakeCard(MyPile, EnemyPile, EnemyThrownCard);
+                }
+            }
+        }
+
+        public void TakeCard(ObservableCollection<Card> winnerPile, ObservableCollection<Card> loserPile, Card wonCard)
+        {
+            winnerPile.Add(winnerPile.First());
+            winnerPile.RemoveAt(0);
+            winnerPile.Add(wonCard);
+            loserPile.RemoveAt(0);
+        }
+
+
+        public void TakeWonCards()
+        {
+            if (MyThrownCard.FigureNumber < EnemyThrownCard.FigureNumber)
+            {
+                EnemyFirstTakenCard = MyThrownCard;
+                EnemySecondTakenCard = EnemyThrownCard;
+            }
+            else
+            {
+                MyFirstTakenCard = EnemyThrownCard;
+                MySecondTakenCard = MyThrownCard;
+            }
+        }
+
+
+        public void ResetGame(ObservableCollection<Card> deck)
+        {
+            Deck = deck;
+            MyThrownCard = null;
+            EnemyThrownCard = null;
+            MyFirstTakenCard = null;
+            MySecondTakenCard = null;
+            EnemyFirstTakenCard = null;
+            EnemySecondTakenCard = null;
+            EnemyPile.Clear();
+            MyPile.Clear();
+            GiveOutCards();
         }
 
         /*  public void Play()
@@ -205,45 +353,5 @@ namespace CardGames
               //Console.ReadKey();
           }
           */
-
-        public void TakeCards(Queue<Card> loserCards, Queue<Card> winnerCards, Card wonCard)
-        {
-            winnerCards.Enqueue(wonCard);
-            loserCards.Dequeue();
-            winnerCards.Enqueue(winnerCards.Dequeue());
-        }
-
-
-        public void PrintGivenCards()
-        {
-            //Console.WriteLine($"Moje: \n");
-            foreach (var card in _myCards)
-            {
-                //Console.WriteLine($"{card.Figure} {card.Color}");
-            }
-
-            //Console.WriteLine($"\n\nPrzeciwnika: \n");
-            foreach (var card in _enemyCards)
-            {
-                Console.WriteLine($"{card.Figure} {card.Color}");
-            }
-        }
-
-
-        public void PrintStatistics()
-        {
-            //Console.WriteLine($"{null,65}Ilość kart:");
-            //Console.WriteLine($"{null,60}Komputer\t Ja");
-            //Console.WriteLine($"{_enemyCards.Count,65}\t {_myCards.Count}");
-
-            //Console.WriteLine($"\n{null,65}Moje karty:");
-
-            //foreach (var card in _myCards)
-            //{
-            //    Console.WriteLine($"{card.Figure,70} {card.Color}");
-            //}
-            //Console.ReadKey();
-            //Console.Clear();
-        }
     }
 }

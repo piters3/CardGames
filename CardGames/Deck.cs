@@ -20,7 +20,7 @@ namespace CardGames
             _colors = new string[] { "Wino", "Żołądź", "Dzwonek", "Serce" };
             _figures = new string[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Walet", "Dama", "Król", "As" };
             //_colors = new string[] { "Wino" };
-            //_figures = new string[] { "2", "3" };
+            //_figures = new string[] { "2", "3", "2", "3", "2", "3", "2", "3", "2", "3", "2", "3"};
             _deck = new ObservableCollection<Card>();
             CreateDeck();
         }
@@ -52,8 +52,8 @@ namespace CardGames
                 Img = CreateImg(new Uri("Images/Joker.jpg", UriKind.Relative))
             };
 
-            _deck.Add(Joker);
-            _deck.Add(Joker);
+            //_deck.Add(Joker);
+            //_deck.Add(Joker);
         }
 
 
@@ -70,7 +70,7 @@ namespace CardGames
             };
             return img;
         }
-        
+
         public ObservableCollection<Card> Shuffle()
         {
             var rnd = new Random();

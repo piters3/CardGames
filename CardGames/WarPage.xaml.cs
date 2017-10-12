@@ -21,51 +21,55 @@ namespace CardGames
     public partial class WarPage : Page
     {
         private War _war;
+        private Deck _deck;
 
         public WarPage()
         {
             InitializeComponent();
-           
-            
-            
-
-            Deck deck = new Deck();
-            _war = new War(deck.Shuffle());
-           
+            _deck = new Deck();
+            _war = new War(_deck.Shuffle());
             DataContext = _war;
-
-
-            //var shuffledDeck = deck.Shuffle();
-            //var i = 0;
-            //var j = 40;
-            //var k = 40;
-            //foreach (var card in shuffledDeck)
-            //{
-
-            //    //var imageSource = new BitmapImage(new Uri("Images/"+card.Image+ ".jpg", UriKind.RelativeOrAbsolute));
-            //    var imageSource = new BitmapImage(new Uri("Images/back.jpg", UriKind.RelativeOrAbsolute));
-            //    var image = new Image { Source = imageSource, Margin = new Thickness(0, j, i, k) };
-
-            //    Grid.SetRow(image, 1);
-            //    Grid.SetColumn(image, 0);
-            //    MainGrid.Children.Add(image);
-            //    i++;
-            //    j--;
-            //    k++;
-            //}
-
-            //foreach(var item in deck.Shuffle())
-            //{
-            //    Console.WriteLine($"{item.Color}");
-            //}
-
-
         }
 
 
         private void ThrowCard(object sender, MouseButtonEventArgs e)
         {
+            TakeWonCardsButton.Visibility = Visibility.Visible;
+            MyCards.IsEnabled = false;
+            TakeWonCardsButton.IsEnabled = true;
+
             _war.ThrowCard();
+
+            if (_war.MyPile.Count == 0)
+            {
+                MessageBox.Show("Przegrałeś wojnę!", "Przegrana", MessageBoxButton.OK, MessageBoxImage.Information);
+                AskForAnotherGame();
+            }
+            else if (_war.EnemyPile.Count == 0)
+            {
+                MessageBox.Show("Wygrałeś wojnę!", "Wygrana", MessageBoxButton.OK, MessageBoxImage.Information);
+                AskForAnotherGame();
+            }
+
+        }
+
+        private void AskForAnotherGame()
+        {
+            MessageBoxResult result = MessageBox.Show("Rozdać karty ponownie?", "Wojna", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    _war.ResetGame(_deck.Shuffle());
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                case MessageBoxResult.Cancel:
+                    if (NavigationService.CanGoBack)
+                    {
+                        NavigationService.GoBack();
+                    }
+                    break;
+            }
         }
 
         private void GiveOutCardsButtonClick(object sender, RoutedEventArgs e)
@@ -75,6 +79,13 @@ namespace CardGames
             button.Visibility = Visibility.Hidden;
             MyCards.Visibility = Visibility.Visible;
             EnemyCards.Visibility = Visibility.Visible;
+        }
+
+        private void TakeWonCards(object sender, RoutedEventArgs e)
+        {
+            MyCards.IsEnabled = true;
+            TakeWonCardsButton.IsEnabled = false;
+            _war.TakeWonCards();
         }
     }
 }
